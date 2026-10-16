@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pergafit Link na Bio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: coluna única de 480px sobre fundo amarelo-manteiga; faixa verde com o logo no topo, cartões brancos empilhados, CTA laranja como único ponto de cor quente forte. */
+:root{
+  --verde:#005139;
+  --verde-escuro:#003b2a;
+  --lima:#b1cd4a;
+  --laranja:#f3911c;
+  --amarelo:#ffe671;
+  --manteiga:#fff6c9;
+  --papel:#ffffff;
+  --tinta:#0b2e24;
+  --tinta-suave:#3f5f55;
+  --linha:#e4e8c9;
+  --f-display:'Gloock','Georgia',serif;
+  --f-texto:'Outfit','Helvetica Neue',Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--manteiga);color:var(--tinta);
+  font-family:var(--f-texto);font-size:16px;line-height:1.55;
+  padding-block:24px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.cartao{max-width:480px;margin:0 auto;background:var(--papel);border-radius:28px;overflow:hidden;box-shadow:0 18px 50px -24px rgba(0,81,57,.45)}
+.topo{background:var(--verde);color:#fff;padding:36px 28px 30px;text-align:center}
+.topo svg{display:block;width:min(300px,82%);height:auto;margin:0 auto}
+.lema{margin:22px auto 0;max-width:30ch;font-size:15px;font-weight:300;color:#e8f3d0;text-wrap:balance}
+.lema b{font-weight:600;color:var(--lima)}
+.corpo{padding:24px 20px 28px;display:flex;flex-direction:column;gap:14px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-weight:700;border-radius:14px;padding:16px 18px;font-size:17px;min-height:54px;text-align:center}
+.btn svg{width:22px;height:22px;flex:none}
+.btn-principal{background:var(--laranja);color:var(--verde-escuro);box-shadow:0 6px 0 #c4710a;transition:transform .12s,box-shadow .12s}
+.btn-principal:hover{transform:translateY(2px);box-shadow:0 4px 0 #c4710a}
+.btn-principal:active{transform:translateY(6px);box-shadow:0 0 0 #c4710a}
+.btn-sec{background:var(--amarelo);color:var(--verde);font-size:15px;min-height:48px;padding:12px 16px}
+.btn-sec:hover{background:#ffdd4f}
+.btn:focus-visible{outline:3px solid var(--verde);outline-offset:3px}
+.regua{display:flex;align-items:center;gap:12px;color:var(--lima);margin:6px 0}
+.regua::before,.regua::after{content:"";flex:1;height:1px;background:var(--linha)}
+.regua i{width:10px;height:10px;background:var(--lima);transform:rotate(45deg)}
+.bloco{border:1px solid var(--linha);border-radius:20px;padding:20px;background:#fcfdf3;display:flex;flex-direction:column;gap:14px}
+.cab{display:flex;gap:14px;align-items:center}
+.ico{width:48px;height:48px;border-radius:14px;background:var(--verde);color:var(--lima);display:grid;place-items:center;flex:none}
+.ico svg{width:24px;height:24px}
+.cab h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:21px;line-height:1.15;color:var(--verde)}
+.cab p{margin:2px 0 0;font-size:13px;color:var(--tinta-suave)}
+.prato{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none}
+.prato li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px dashed var(--linha);font-size:15px}
+.prato li:first-child{border-top:0}
+.prato span{color:var(--tinta-suave);font-size:13px;text-align:right}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.chips li{border:1px solid var(--lima);color:var(--verde);background:#fff;border-radius:999px;padding:4px 13px;font-size:13px;font-weight:500}
+.passos{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;counter-reset:p}
+.passos li{counter-increment:p;font-size:15px;display:flex;gap:10px}
+.passos li::before{content:counter(p,decimal-leading-zero);font-weight:700;color:var(--laranja);font-variant-numeric:tabular-nums}
+.aviso{border-radius:16px;border:1px solid var(--linha);border-left:5px solid var(--laranja);background:#f1f6df;padding:16px 18px;display:flex;gap:12px}
+.aviso svg{width:22px;height:22px;flex:none;color:var(--verde);margin-top:2px}
+.aviso strong{display:block;color:var(--verde);font-size:15px}
+.aviso p{margin:2px 0 0;font-size:13px;color:var(--tinta-suave)}
+.rodape{background:var(--verde-escuro);color:#9fbfae;text-align:center;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:18px 16px}
+.rodape b{color:var(--lima);font-weight:600}
+
+.preco{font-variant-numeric:tabular-nums;font-weight:600;color:var(--verde)}
+.nota{margin:0;font-size:12.5px;color:var(--tinta-suave)}
+.base{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 14px;background:#fff;border:1px solid var(--lima);border-radius:14px}
+.base strong{font-size:15px}
+.base small{display:block;color:var(--tinta-suave);font-size:12.5px}
+.extras{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+.extras li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px dashed var(--linha)}
+.extras li:first-child{border-top:0}
+.extras .nome{min-width:0;font-size:15px}
+.extras .nome small{display:block;color:var(--tinta-suave);font-size:12.5px;font-variant-numeric:tabular-nums}
+.qtd{display:flex;align-items:center;gap:4px;flex:none}
+.qtd button{width:36px;height:36px;border-radius:10px;border:1px solid var(--lima);background:#fff;color:var(--verde);font:700 18px var(--f-texto);cursor:pointer;line-height:1}
+.qtd button:hover{background:var(--amarelo)}
+.qtd button:focus-visible,.campo:focus-visible,.modo button:focus-visible{outline:3px solid var(--verde);outline-offset:2px}
+.qtd output{min-width:24px;text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+.linha-total{display:flex;justify-content:space-between;align-items:baseline;font-size:15px}
+.linha-total.grande{font-size:18px;font-weight:700;color:var(--verde)}
+.carrinho{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.carrinho li{background:#fff;border:1px solid var(--linha);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.carrinho .topo-item{display:flex;justify-content:space-between;gap:10px}
+.carrinho .topo-item strong{font-size:15px}
+.carrinho .detalhe{font-size:12.5px;color:var(--tinta-suave)}
+.carrinho .rodape-item{display:flex;justify-content:space-between;align-items:center}
+.remover{background:none;border:0;color:#a3401a;font:500 13px var(--f-texto);text-decoration:underline;cursor:pointer;padding:6px 2px}
+.vazio{margin:0;padding:14px;border:1px dashed var(--lima);border-radius:14px;color:var(--tinta-suave);font-size:14px;text-align:center}
+.modo{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.modo button{border:1px solid var(--lima);background:#fff;color:var(--verde);border-radius:12px;padding:11px 8px;font:600 15px var(--f-texto);cursor:pointer;min-height:46px}
+.modo button[aria-pressed="true"]{background:var(--verde);color:#fff;border-color:var(--verde)}
+label.rot{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:500;color:var(--tinta-suave)}
+.campo{width:100%;border:1px solid var(--linha);border-radius:12px;padding:12px 14px;font:400 16px var(--f-texto);color:var(--tinta);background:#fff;min-height:48px}
+.campo[aria-invalid="true"]{border-color:#c0392b}
+.erro{margin:0;font-size:13px;color:#a8321f;min-height:0}
+.erro:empty{display:none}
+.frete{padding:12px 14px;border-radius:12px;background:#f1f6df;font-size:14px;color:var(--verde)}
+.btn[aria-disabled="true"]{opacity:.55;box-shadow:none;cursor:not-allowed}
+.btn-limpar{background:none;border:0;color:var(--tinta-suave);font:500 13px var(--f-texto);text-decoration:underline;cursor:pointer;align-self:center;padding:6px}
+button.btn{border:0;font-family:var(--f-texto);cursor:pointer;width:100%}
+.vitrine{background:var(--verde);color:#fff;border-radius:18px;padding:22px 20px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+.vitrine::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:var(--lima);opacity:.18}
+.vitrine .selo{align-self:flex-start;background:var(--amarelo);color:var(--verde);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
+.vitrine .valor{font-family:var(--f-display);font-size:46px;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.vitrine .valor small{display:block;font-family:var(--f-texto);font-size:14px;font-weight:400;color:var(--lima);margin-top:6px}
+.compoe{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.compoe div{background:rgba(255,255,255,.1);border-radius:12px;padding:12px}
+.compoe b{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--lima);font-weight:600;margin-bottom:3px}
+.compoe span{font-size:14px;line-height:1.35}
+.vitrine .qtd button{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+.vitrine .qtd button:hover{background:rgba(255,255,255,.15)}
+.tiers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tier{border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:14px;padding:12px 10px;font-family:var(--f-texto);cursor:pointer;text-align:center;display:flex;flex-direction:column;gap:2px;min-height:76px;justify-content:center}
+.tier b{font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1}
+.tier span{font-size:12px;color:var(--lima);font-variant-numeric:tabular-nums}
+.tier[aria-pressed="true"]{background:var(--amarelo);color:var(--verde);border-color:var(--amarelo)}
+.tier[aria-pressed="true"] span{color:var(--verde);font-weight:600}
+.tier:focus-visible{outline:3px solid var(--amarelo);outline-offset:2px}
+.cardapio{display:flex;flex-direction:column;gap:8px}
+.cardapio .grupo-pratos{background:rgba(255,255,255,.1);border-radius:12px;padding:12px}
+.grupo-pratos h3{margin:0 0 4px;color:var(--lima);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.pratos{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+.pratos li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px dashed rgba(255,255,255,.18)}
+.pratos li:first-child{border-top:0}
+.pratos .pn{min-width:0;flex:1;font-size:14px;line-height:1.35;color:#eaf3dc}
+.opcao-prato{display:none;flex-direction:column;align-items:flex-start;gap:6px;margin-top:8px;font-size:12px;color:var(--lima);font-weight:600;letter-spacing:.02em}
+.opcao-prato select{appearance:none;width:100%;border:1px solid var(--amarelo);border-radius:10px;background:var(--amarelo);color:var(--verde);padding:8px 30px 8px 10px;font:600 13px var(--f-texto);cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--verde) 50%),linear-gradient(135deg,var(--verde) 50%,transparent 50%);background-position:calc(100% - 15px) 50%,calc(100% - 10px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+.opcao-prato select:focus{outline:2px solid var(--lima);outline-offset:2px}
+.pratos .qtd{gap:4px}
+.pratos .qtd button{width:34px;height:34px;background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+.pratos .qtd button:hover:not(:disabled){background:rgba(255,255,255,.15)}
+.pratos .qtd button:disabled{opacity:.35;cursor:not-allowed}
+.pratos .qtd button:focus-visible{outline:3px solid var(--amarelo);outline-offset:2px}
+.pratos .qtd output{min-width:20px;color:#fff}
+.cardapio .gnota{display:block;margin-top:6px;font-size:12px;line-height:1.4;color:var(--lima)}
+.contador{margin:0;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.12);font-size:14px;font-weight:600;color:#fff}
+.contador.completo{background:var(--amarelo);color:var(--verde)}
+.contador.alerta{background:rgba(255,255,255,.18);color:var(--amarelo)}
+.gramas{margin:0;font-size:14px;color:var(--amarelo)}
+.gramas strong{font-weight:700}
+textarea.campo{min-height:84px;resize:vertical;font-family:var(--f-texto)}
+.linha-qtd{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:15px}
+@media (max-width:380px){.compoe{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.btn-principal{transition:none}}
+</style>
+<script>window.PERGAFIT_MAPS_CONFIG = { apiBase: "https://forge.manus.ai", browserKey: "EF9VZXrihQntctpgWix6D2" };</script>
+</head>
+<body>
+<main class="cartao">
+  <header class="topo">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="250 428 610 212" role="img" aria-label="Pergafit">
+<defs>
+<g>
+<g id="glyph-0-0">
+<path d="M 6.15625 0 L 6.15625 -8.8125 L 18.09375 -8.8125 L 18.09375 -12.953125 L 6.15625 -12.953125 L 6.15625 -19.453125 L 18.78125 -19.453125 L 18.78125 -23.78125 L 1.671875 -23.78125 L 1.671875 0 Z M 6.15625 0 "/>
+</g>
+<g id="glyph-0-1">
+<path d="M 6.15625 0 L 6.15625 -23.8125 L 1.703125 -23.8125 L 1.703125 0 Z M 6.15625 0 "/>
+</g>
+<g id="glyph-0-2">
+<path d="M 7.828125 0 L 12.3125 0 L 12.3125 -19.734375 L 19.859375 -19.734375 L 19.859375 -23.8125 C 12.953125 -23.8125 7.140625 -23.8125 0.265625 -23.8125 L 0.265625 -19.734375 L 7.828125 -19.734375 Z M 7.828125 0 "/>
+</g>
+<g id="glyph-1-0">
+<path d="M 1.671875 -2.1875 C 1.671875 -3.40625 2.734375 -4.09375 4.59375 -4.09375 C 6.90625 -4.09375 8.203125 -5.0625 8.203125 -6.8125 C 8.203125 -8.515625 6.796875 -9.59375 4.578125 -9.59375 C 2.375 -9.59375 0.953125 -8.5625 0.9375 -6.921875 L 1.75 -6.921875 C 1.75 -8.109375 2.84375 -8.84375 4.578125 -8.84375 C 6.3125 -8.84375 7.390625 -8.0625 7.390625 -6.8125 C 7.390625 -5.546875 6.359375 -4.828125 4.5625 -4.828125 C 2.234375 -4.828125 0.875 -3.859375 0.875 -2.1875 L 0.875 0 L 8.1875 0 L 8.1875 -0.765625 L 1.671875 -0.765625 Z M 1.671875 -2.1875 "/>
+</g>
+<g id="glyph-1-1">
+<path d="M 4.796875 0.109375 C 7.109375 0.109375 8.71875 -1.390625 8.71875 -3.53125 L 8.71875 -5.953125 C 8.71875 -8.09375 7.109375 -9.609375 4.796875 -9.609375 C 2.5 -9.609375 0.90625 -8.09375 0.90625 -5.953125 L 0.90625 -3.53125 C 0.90625 -1.390625 2.5 0.109375 4.796875 0.109375 Z M 4.796875 -0.65625 C 2.984375 -0.65625 1.703125 -1.84375 1.703125 -3.53125 L 1.703125 -5.953125 C 1.703125 -7.640625 2.984375 -8.828125 4.796875 -8.828125 C 6.640625 -8.828125 7.921875 -7.640625 7.921875 -5.953125 L 7.921875 -3.53125 C 7.921875 -1.84375 6.640625 -0.65625 4.796875 -0.65625 Z M 4.796875 -0.65625 "/>
+</g>
+<g id="glyph-1-2">
+<path d="M 3.296875 -0.765625 L 3.296875 -9.5 L 3.1875 -9.5 L 0.75 -8.84375 L 0.75 -8.078125 L 2.5 -8.53125 L 2.5 -0.765625 L 0.53125 -0.765625 L 0.53125 0 L 5.15625 0 L 5.15625 -0.765625 Z M 3.296875 -0.765625 "/>
+</g>
+<g id="glyph-1-3">
+<path d="M 4.515625 0.15625 C 6.8125 0.15625 8.25 -0.859375 8.25 -2.484375 C 8.25 -3.984375 7.3125 -4.6875 4.53125 -5.1875 C 2.421875 -5.59375 1.671875 -6.09375 1.671875 -7.125 C 1.671875 -8.1875 2.78125 -8.90625 4.4375 -8.90625 C 5.609375 -8.90625 6.65625 -8.484375 7.375 -7.75 L 7.828125 -8.328125 C 7 -9.171875 5.796875 -9.640625 4.453125 -9.640625 C 2.328125 -9.640625 0.875 -8.625 0.875 -7.125 C 0.875 -5.640625 1.859375 -4.890625 4.40625 -4.4375 C 6.703125 -4 7.4375 -3.53125 7.4375 -2.46875 C 7.4375 -1.3125 6.3125 -0.59375 4.515625 -0.59375 C 3.1875 -0.59375 1.8125 -1.203125 1.15625 -2.0625 L 0.65625 -1.5 C 1.5 -0.484375 3 0.15625 4.515625 0.15625 Z M 4.515625 0.15625 "/>
+</g>
+<g id="glyph-1-4">
+<path d="M 1.328125 0 L 2.125 0 L 2.125 -9.46875 L 1.328125 -9.46875 Z M 1.328125 0 "/>
+</g>
+<g id="glyph-1-5">
+<path d="M 8.125 -9.46875 L 8.125 -1.328125 L 2.140625 -9.46875 L 1.328125 -9.46875 L 1.328125 0 L 2.125 0 L 2.125 -8.1875 L 8.125 0 L 8.9375 0 L 8.9375 -9.46875 Z M 8.125 -9.46875 "/>
+</g>
+<g id="glyph-1-6">
+<path d="M 5.59375 0.171875 C 6.921875 0.171875 8.125 -0.328125 9.03125 -1.234375 L 8.5 -1.765625 C 7.71875 -1.015625 6.703125 -0.59375 5.609375 -0.59375 C 3.1875 -0.59375 1.515625 -2.28125 1.515625 -4.734375 C 1.515625 -7.1875 3.1875 -8.875 5.609375 -8.875 C 6.703125 -8.875 7.6875 -8.46875 8.4375 -7.703125 L 8.984375 -8.21875 C 8.09375 -9.140625 6.90625 -9.640625 5.59375 -9.640625 C 2.71875 -9.640625 0.71875 -7.625 0.71875 -4.734375 C 0.71875 -1.859375 2.71875 0.171875 5.59375 0.171875 Z M 5.59375 0.171875 "/>
+</g>
+<g id="glyph-1-7">
+<path d="M 2.125 -0.765625 L 2.125 -4.40625 L 7.65625 -4.40625 L 7.65625 -5.171875 L 2.125 -5.171875 L 2.125 -8.71875 L 7.921875 -8.71875 L 7.921875 -9.46875 L 1.328125 -9.46875 L 1.328125 0 L 8.078125 0 L 8.078125 -0.765625 Z M 2.125 -0.765625 "/>
+</g>
+</g>
+</defs>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 268.109375 508.699219 L 268.109375 562.535156 C 268.109375 564.070312 269.351562 565.3125 270.886719 565.3125 L 289.613281 565.3125 C 307.429688 565.3125 318.898438 553.84375 318.898438 535.210938 C 318.898438 517.1875 308.042969 505.925781 289.613281 505.925781 L 270.886719 505.925781 C 269.351562 505.925781 268.109375 507.167969 268.109375 508.699219 M 225.71875 496.078125 L 225.71875 496.003906 C 225.71875 494.46875 226.960938 493.226562 228.492188 493.226562 L 304.5625 493.226562 C 334.667969 493.226562 352.894531 508.996094 352.894531 535.003906 C 352.894531 561.21875 333.4375 578.011719 304.5625 578.011719 L 270.886719 578.011719 C 269.351562 578.011719 268.109375 579.253906 268.109375 580.785156 L 268.109375 622.859375 C 268.109375 627.71875 270.914062 632.78125 274.542969 635.863281 C 274.621094 635.933594 274.707031 635.996094 274.792969 636.054688 L 275.527344 636.570312 C 276.269531 637.089844 276.710938 637.9375 276.710938 638.84375 L 276.710938 638.925781 C 276.710938 640.457031 275.46875 641.699219 273.9375 641.699219 L 228.492188 641.699219 C 226.960938 641.699219 225.71875 640.457031 225.71875 638.925781 L 225.71875 638.757812 C 225.71875 637.898438 226.113281 637.089844 226.789062 636.566406 L 227.5625 635.964844 C 231.65625 632.894531 234.320312 627.773438 234.320312 622.859375 L 234.320312 512.066406 C 234.320312 507.152344 231.65625 501.828125 227.5625 498.960938 L 226.652344 498.152344 C 226.058594 497.625 225.71875 496.871094 225.71875 496.078125 "/>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 392.007812 576.296875 L 392.007812 626.414062 C 392.007812 627.84375 393.167969 629 394.59375 629 L 424.363281 629 C 436.652344 629 449.554688 622.246094 456.722656 612.210938 L 459.023438 608.835938 C 459.503906 608.128906 460.304688 607.707031 461.160156 607.707031 C 462.71875 607.707031 463.921875 609.070312 463.726562 610.617188 L 460.078125 639.4375 C 459.917969 640.730469 458.816406 641.699219 457.511719 641.699219 L 352.203125 641.699219 C 350.773438 641.699219 349.617188 640.542969 349.617188 639.113281 L 349.617188 638.664062 C 349.617188 637.867188 349.984375 637.113281 350.613281 636.621094 L 351.460938 635.964844 C 355.554688 632.894531 358.21875 627.773438 358.21875 622.859375 L 358.21875 512.066406 C 358.21875 507.152344 355.554688 501.828125 351.460938 498.960938 L 350.484375 498.09375 C 349.933594 497.605469 349.617188 496.902344 349.617188 496.160156 L 349.617188 495.8125 C 349.617188 494.382812 350.773438 493.226562 352.203125 493.226562 L 457.515625 493.226562 C 458.816406 493.226562 459.917969 494.195312 460.082031 495.488281 L 463.722656 524.105469 C 463.921875 525.648438 462.714844 527.015625 461.15625 527.015625 L 461.125 527.015625 C 460.289062 527.015625 459.503906 526.613281 459.019531 525.933594 L 456.722656 522.714844 C 449.554688 512.683594 436.652344 505.925781 424.363281 505.925781 L 394.59375 505.925781 C 393.167969 505.925781 392.007812 507.082031 392.007812 508.511719 L 392.007812 558.425781 C 392.007812 559.855469 393.167969 561.011719 394.59375 561.011719 L 417.605469 561.011719 C 427.640625 561.011719 435.21875 554.460938 436.445312 544.425781 L 436.445312 544.015625 L 438.160156 544.015625 C 439.589844 544.015625 440.75 545.171875 440.75 546.601562 L 440.75 588.121094 C 440.75 589.546875 439.589844 590.707031 438.160156 590.707031 L 436.445312 590.707031 L 436.445312 590.296875 C 435.21875 580.261719 427.640625 573.710938 417.605469 573.710938 L 394.59375 573.710938 C 393.167969 573.710938 392.007812 574.867188 392.007812 576.296875 "/>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 505.664062 508.625 L 505.664062 562.613281 C 505.664062 564.105469 506.875 565.3125 508.363281 565.3125 L 527.167969 565.3125 C 544.984375 565.3125 556.453125 553.84375 556.453125 535.210938 C 556.453125 517.1875 545.601562 505.925781 527.167969 505.925781 L 508.363281 505.925781 C 506.875 505.925781 505.664062 507.132812 505.664062 508.625 M 463.273438 496.109375 L 463.273438 495.925781 C 463.273438 494.433594 464.484375 493.226562 465.972656 493.226562 L 542.117188 493.226562 C 572.222656 493.226562 590.449219 508.996094 590.449219 535.003906 C 590.449219 557.941406 575.703125 573.503906 552.5625 577.191406 L 554.097656 577.960938 C 554.167969 577.992188 554.234375 578.03125 554.296875 578.066406 C 560.613281 581.761719 566.710938 588.078125 569.96875 594.390625 L 585.53125 623.679688 C 587.785156 628.183594 592.292969 632.484375 596.59375 634.941406 L 599.691406 636.632812 C 600.558594 637.105469 601.097656 638.011719 601.097656 639 C 601.097656 640.492188 599.886719 641.699219 598.398438 641.699219 L 564.851562 641.699219 C 560.140625 641.699219 555.226562 638.628906 552.765625 634.328125 L 523.832031 579.449219 C 523.367188 578.5625 522.445312 578.011719 521.445312 578.011719 L 508.363281 578.011719 C 506.875 578.011719 505.664062 579.21875 505.664062 580.710938 L 505.664062 622.859375 C 505.664062 627.722656 508.472656 632.785156 512.101562 635.867188 C 512.179688 635.933594 512.261719 635.996094 512.347656 636.054688 L 513.117188 636.59375 C 513.835938 637.097656 514.265625 637.921875 514.265625 638.804688 L 514.265625 639 C 514.265625 640.492188 513.058594 641.699219 511.566406 641.699219 L 465.972656 641.699219 C 464.484375 641.699219 463.273438 640.492188 463.273438 639 L 463.273438 638.71875 C 463.273438 637.886719 463.660156 637.097656 464.316406 636.589844 L 465.117188 635.964844 C 469.214844 632.894531 471.875 627.773438 471.875 622.859375 L 471.875 512.066406 C 471.875 507.152344 469.214844 501.828125 465.117188 498.960938 L 464.179688 498.128906 C 463.605469 497.617188 463.273438 496.882812 463.273438 496.109375 "/>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 590.308594 568.589844 C 590.308594 521.488281 620.617188 490.976562 665.257812 490.976562 C 684.507812 490.976562 711.011719 494.992188 711.011719 519.773438 C 711.011719 533.085938 714.386719 529.871094 700.871094 529.871094 C 687.355469 529.871094 695.785156 536.402344 695.785156 523.089844 C 695.785156 516.210938 691.65625 512.414062 685.613281 507.832031 C 684.742188 507.171875 679.144531 504.296875 675.5625 503.816406 C 674.304688 503.648438 673.023438 503.671875 671.8125 503.671875 C 641.09375 503.671875 624.300781 529.269531 624.300781 563.878906 C 624.300781 597.667969 640.277344 622.65625 672.019531 622.65625 C 675.46875 622.65625 678.785156 622.390625 681.972656 621.757812 C 683.328125 621.488281 684.304688 620.296875 684.304688 618.914062 L 684.304688 587.636719 C 684.304688 582.71875 681.847656 577.394531 677.753906 574.324219 L 677.023438 573.757812 C 676.320312 573.210938 675.910156 572.371094 675.910156 571.476562 C 675.910156 569.882812 677.203125 568.589844 678.796875 568.589844 L 723.808594 568.589844 C 725.402344 568.589844 726.695312 569.882812 726.695312 571.476562 C 726.695312 572.367188 726.285156 573.210938 725.582031 573.757812 L 724.851562 574.324219 C 720.960938 577.394531 718.300781 582.71875 718.300781 587.636719 L 718.300781 603.757812 C 718.300781 604.199219 718.203125 604.636719 718.011719 605.035156 C 706.308594 629.445312 686.941406 643.746094 658.707031 643.746094 C 617.953125 643.746094 590.308594 613.644531 590.308594 568.589844 "/>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 792.285156 595.035156 L 772.84375 545.238281 C 771.960938 542.96875 768.753906 542.960938 767.855469 545.222656 L 748.070312 595.019531 C 747.371094 596.78125 748.667969 598.691406 750.5625 598.691406 L 789.789062 598.691406 C 791.675781 598.691406 792.972656 596.796875 792.285156 595.035156 M 764.839844 497.324219 L 764.839844 495.910156 C 764.839844 494.429688 766.039062 493.226562 767.519531 493.226562 L 787.167969 493.226562 C 788.273438 493.226562 789.265625 493.90625 789.667969 494.9375 L 839.546875 623.371094 C 839.570312 623.4375 839.601562 623.503906 839.632812 623.570312 C 841.671875 628.011719 845.488281 632.628906 849.714844 635.28125 C 849.789062 635.328125 849.863281 635.371094 849.941406 635.410156 L 852.28125 636.644531 C 853.164062 637.109375 853.714844 638.023438 853.714844 639.019531 C 853.714844 640.5 852.515625 641.699219 851.03125 641.699219 L 800.695312 641.699219 C 799.214844 641.699219 798.015625 640.5 798.015625 639.019531 L 798.015625 638.832031 C 798.015625 637.9375 798.464844 637.101562 799.207031 636.601562 L 799.695312 636.277344 C 799.800781 636.207031 799.90625 636.128906 800.003906 636.046875 C 803.585938 632.960938 805.152344 627.917969 803.132812 623.472656 L 799.089844 613.097656 C 798.6875 612.070312 797.695312 611.390625 796.589844 611.390625 L 743.296875 611.390625 C 742.207031 611.390625 741.222656 612.050781 740.8125 613.0625 L 736.574219 623.472656 C 734.960938 627.914062 736.132812 632.957031 739.703125 636.039062 C 739.800781 636.128906 739.910156 636.207031 740.019531 636.28125 L 740.503906 636.601562 C 741.246094 637.101562 741.695312 637.9375 741.695312 638.835938 L 741.695312 639.019531 C 741.695312 640.5 740.496094 641.699219 739.015625 641.699219 L 711.40625 641.699219 C 709.925781 641.699219 708.726562 640.5 708.726562 639.019531 L 708.726562 638.945312 C 708.726562 637.988281 709.234375 637.101562 710.0625 636.625 L 712.617188 635.148438 C 716.710938 632.6875 721.011719 627.980469 722.648438 623.472656 L 767.5 511.453125 C 769.34375 506.742188 768.320312 501.417969 765.042969 497.527344 Z M 764.839844 497.324219 "/>
+<g fill="currentColor" fill-opacity="1">
+<use xlink:href="#glyph-0-0" x="804.7236" y="515.6006"/>
+<use xlink:href="#glyph-0-1" x="824.418169" y="515.6006"/>
+</g>
+<g fill="currentColor" fill-opacity="1">
+<use xlink:href="#glyph-0-2" x="833.364062" y="515.6006"/>
+</g>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 534.261719 459.542969 L 506.34375 459.542969 L 506.34375 439.863281 L 506.398438 439.832031 C 515.6875 446.378906 524.976562 452.925781 534.265625 459.476562 Z M 534.261719 459.542969 "/>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 513.359375 436.253906 L 541.28125 436.253906 L 541.28125 455.933594 L 541.222656 455.964844 C 531.933594 449.417969 522.644531 442.871094 513.355469 436.320312 Z M 513.359375 436.253906 "/>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 523.113281 446.9375 L 523.796875 444.839844 L 524.523438 446.9375 L 526.75 446.9375 L 524.949219 448.265625 L 525.601562 450.375 L 523.820312 449.097656 L 522.007812 450.371094 L 522.671875 448.265625 L 520.871094 446.9375 Z M 523.113281 446.9375 "/>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 496.832031 448.460938 L 315.386719 448.460938 L 315.386719 447.335938 L 496.832031 447.335938 Z M 496.832031 448.460938 "/>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 732.371094 448.460938 L 550.929688 448.460938 L 550.929688 447.335938 L 732.371094 447.335938 Z M 732.371094 448.460938 "/>
+<g fill="currentColor" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="739.0337" y="452.5024"/>
+<use xlink:href="#glyph-1-1" x="748.081189" y="452.5024"/>
+<use xlink:href="#glyph-1-0" x="757.683158" y="452.5024"/>
+<use xlink:href="#glyph-1-2" x="766.730647" y="452.5024"/>
+</g>
+<g fill="currentColor" fill-opacity="1">
+<use xlink:href="#glyph-1-3" x="261.869936" y="452.5024"/>
+<use xlink:href="#glyph-1-4" x="270.728091" y="452.5024"/>
+<use xlink:href="#glyph-1-5" x="274.176685" y="452.5024"/>
+<use xlink:href="#glyph-1-6" x="284.427802" y="452.5024"/>
+<use xlink:href="#glyph-1-7" x="294.070342" y="452.5024"/>
+</g>
+<path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 674.722656 558.296875 C 674.703125 558.265625 674.703125 558.1875 674.722656 558.15625 C 674.746094 558.121094 675.289062 557.792969 675.398438 557.707031 C 677.722656 555.898438 679.539062 553.347656 680.621094 550.609375 C 681.867188 547.453125 682.351562 544.117188 684.132812 541.15625 C 688.140625 534.484375 695.300781 533.9375 702.40625 533.78125 C 704.226562 533.808594 706.042969 533.898438 707.855469 534.050781 C 708.492188 534.105469 708.910156 534.753906 708.707031 535.363281 C 706.492188 542.101562 699.433594 546.285156 693.109375 548.628906 C 692.851562 548.726562 691.589844 549.09375 691.488281 549.191406 C 691.390625 549.285156 691.398438 549.46875 691.507812 549.535156 C 691.605469 549.601562 691.808594 549.515625 691.925781 549.488281 C 694.925781 548.789062 698.78125 547.824219 701.414062 546.222656 C 707.171875 542.722656 711.074219 537.1875 710.046875 530.015625 C 709.972656 529.507812 709.617188 528.316406 709.6875 527.90625 C 709.828125 527.125 711.023438 526.964844 711.332031 527.792969 C 711.554688 528.390625 711.6875 529.734375 711.734375 530.398438 C 711.976562 533.949219 711.085938 537.296875 709.054688 540.179688 C 708.914062 540.378906 708.851562 540.621094 708.886719 540.863281 C 709.808594 547.394531 707.894531 553.644531 702.308594 557.453125 C 695.007812 562.433594 683.625 563.382812 675.855469 558.980469 C 675.703125 558.898438 674.753906 558.355469 674.722656 558.296875 "/>
+</svg>
+
+    <p class="lema"><b>Comida de verdade</b> para a rotina real.</p>
+  </header>
+
+  <div class="corpo">
+    <a class="btn btn-principal" id="cta" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.8A8.5 8.5 0 1 1 8 19.4L3 21z"/><path d="M9 10c.5 2.2 2.3 4 5 5l1.4-1.4-2-1-.8.8c-.9-.4-1.7-1.200-2.100-2.100l.8-.8-1-2z"/></svg>
+      Pedir pelo WhatsApp
+    </a>
+
+    <div class="regua" aria-hidden="true"><i></i></div>
+
+    <section class="bloco" id="montar" aria-labelledby="t-cardapio">
+      <div class="vitrine">
+        <span class="selo">Combo Pergafit</span>
+        <h2 id="t-cardapio" style="margin:0;font-family:var(--f-display);font-weight:400;font-size:24px;line-height:1.15">Escolha o tamanho do seu combo</h2>
+        <div class="tiers" id="tiers" role="group" aria-label="Quantidade de marmitas"></div>
+        <div class="valor" id="base-preco"></div>
+        <p class="gramas"><strong>Marmitas de 300 a 350 g.</strong> Cada seleção vale uma marmita; complete o tamanho escolhido.</p>
+        <div class="cardapio" id="escolha" aria-label="Selecione os sabores do combo"></div>
+        <p class="contador" id="contador" role="status" aria-live="polite"></p>
+        <div class="linha-qtd"><span>Quantos combos iguais?</span>
+          <div class="qtd"><button type="button" id="q-menos" aria-label="Diminuir combos">&minus;</button><output id="q-combo" aria-live="polite">1</output><button type="button" id="q-mais" aria-label="Aumentar combos">+</button></div>
+        </div>
+        <button class="btn btn-principal" id="add-combo" type="button" aria-disabled="true" aria-describedby="contador">Adicionar ao carrinho</button>
+      </div>
+    </section>
+
+    <section class="bloco" id="carrinho-bloco" aria-labelledby="t-carrinho">
+      <div class="cab">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.400 11h10.600l2-8H6.200"/><circle cx="9" cy="19.500" r="1.500"/><circle cx="17" cy="19.500" r="1.500"/></svg></div>
+        <div><h2 id="t-carrinho">Seu carrinho</h2><p id="resumo-carrinho">Salvo neste aparelho</p></div>
+      </div>
+      <ul class="carrinho" id="carrinho"></ul>
+      <p class="vazio" id="vazio">Seu carrinho está vazio. Adicione um combo acima.</p>
+      <button class="btn-limpar" id="limpar" type="button" hidden>Esvaziar carrinho</button>
+    </section>
+
+    <section class="bloco" id="entrega" aria-labelledby="t-entrega">
+      <div class="cab">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h11v10H2z"/><path d="M13 9h4l3 3v4h-7"/><circle cx="6.500" cy="17.500" r="1.800"/><circle cx="16.500" cy="17.500" r="1.800"/></svg></div>
+        <div><h2 id="t-entrega">Entrega ou retirada</h2><p id="regra-frete"></p></div>
+      </div>
+      <div class="modo" role="group" aria-label="Forma de recebimento">
+        <button type="button" id="modo-entrega" aria-pressed="true">Entrega</button>
+        <button type="button" id="modo-retirada" aria-pressed="false">Retirada</button>
+      </div>
+      <label class="rot" for="nome">Seu nome
+        <input class="campo" id="nome" type="text" autocomplete="name" placeholder="Como podemos te chamar?" maxlength="60">
+      </label>
+      <label class="rot" for="obs">Observações (tipo de massa, molho ou restrições)
+        <textarea class="campo" id="obs" placeholder="Ex.: fusilli ao molho branco; sem cebola" maxlength="400"></textarea>
+      </label>
+      <div id="campos-entrega" style="display:flex;flex-direction:column;gap:14px">
+        <label class="rot" for="endereco">Qual é o endereço completo para entrega?
+          <input class="campo" id="endereco" type="text" autocomplete="street-address" placeholder="Digite normalmente: rua, número, bairro e cidade" maxlength="180">
+        </label>
+        <p class="nota">Digite seu endereço normalmente. Usaremos o Google Maps apenas para calcular a rota e o frete.</p>
+        <label class="rot" for="cep">CEP
+          <input class="campo" id="cep" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9">
+        </label>
+        <label class="rot" for="compl">Complemento (opcional)
+          <input class="campo" id="compl" type="text" autocomplete="address-line2" placeholder="Ex.: bloco 2, apto 302" maxlength="80">
+        </label>
+        <p class="nota" id="status-rota" role="status" aria-live="polite">Digite seu endereço normalmente; calcularemos a distância automaticamente.</p>
+        <p class="erro" id="erro-cep" role="alert"></p>
+        <div class="frete" id="frete" aria-live="polite"></div>
+        <p class="nota">O valor do frete será confirmado oficialmente após o envio do pedido pelo WhatsApp.</p>
+      </div>
+      <div class="linha-total"><span>Subtotal</span><span class="preco" id="subtotal">R$ 0,00</span></div>
+      <div class="linha-total grande"><span>Total do pedido</span><span class="preco" id="total">R$ 0,00</span></div>
+      <p class="nota" id="nota-total"></p>
+      <a class="btn btn-principal" id="cta-pedido" href="#" target="_blank" rel="noopener" aria-disabled="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.8A8.5 8.5 0 1 1 8 19.4L3 21z"/></svg>
+        Fazer meu pedido
+      </a>
+      <p class="erro" id="erro-pedido" role="alert"></p>
+    </section>
+
+    <aside class="aviso">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+      <div><strong>Contato oficial</strong><p>Este é o único WhatsApp oficial da Pergafit. Desconsidere qualquer outro número.</p></div>
+    </aside>
+  </div>
+
+  <footer class="rodape"><b>Pergafit</b> &middot; Since 2021</footer>
+</main>
+
+<script>
+  // ===== EDITE AQUI =====
+  // Número oficial do WhatsApp (DDI + DDD + número, só dígitos).
+  var WHATSAPP = "559183625465";
+  // ATENÇÃO: valores de exemplo. Troque pelos preços reais do restaurante.
+  var TIERS = [
+    { id: "m5",  marm: 5,  preco: 115.00 },
+    { id: "m10", marm: 10, preco: 220.00 },
+    { id: "m15", marm: 15, preco: 315.00 },
+    { id: "m20", marm: 20, preco: 400.00 }
+  ];
+  var EXTRAS = [
+    { id: "frango",   nome: "Filé de peito de frango", preco: 8.00 },
+    { id: "coxinha",  nome: "Coxinha da asa de frango", preco: 6.00 },
+    { id: "picadinho",nome: "Picadinho",                preco: 10.00 },
+    { id: "batata",   nome: "Batata-doce roxa",         preco: 4.00 },
+    { id: "legumes",  nome: "Legumes",                  preco: 3.00 }
+  ];
+  var VALOR_KM = 2.00; // Tarifa confirmada pelo usuário: R$ 2,00 por km.
+  var ORIGEM_ENTREGA = "Pergaminho Fit, Conjunto Stelio Maroja, Travessa BL18, 205 Quadra G, bloco 2, Coqueiro, Ananindeua - PA, 67140-330, Brasil";
+  // ======================
+
+  var CHAVE = "pergafit-pedido-v1";
+  var brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+  var $ = function (id) { return document.getElementById(id); };
+  var estado = { carrinho: [], modo: "entrega", nome: "", endereco: "", cep: "", compl: "", km: "", obs: "", destino: null, rotaEstado: "vazio" };
+  var direcoes = null, geocodificador = null, autocompleteEndereco = null;
+  var sequenciaRota = 0, mensagemFalhaRota = "";
+  var rascunho = {}; // adicionais do combo em montagem: id -> quantidade
+
+  function carregar() {
+    try {
+      var s = JSON.parse(localStorage.getItem(CHAVE) || "null");
+      if (s && Array.isArray(s.carrinho)) {
+        estado.carrinho = s.carrinho.filter(function (i) { return i && i.qtd > 0 && i.extras; });
+        estado.modo = s.modo === "retirada" ? "retirada" : "entrega";
+        estado.nome = String(s.nome || ""); estado.endereco = String(s.endereco || ""); estado.cep = String(s.cep || ""); estado.compl = String(s.compl || ""); estado.obs = String(s.obs || "");
+        estado.destino = s.destino && isFinite(Number(s.destino.lat)) && isFinite(Number(s.destino.lng)) ? { lat: Number(s.destino.lat), lng: Number(s.destino.lng) } : null;
+        estado.km = ""; estado.rotaEstado = estado.endereco ? "aguardando" : "vazio";
+      }
+    } catch (e) {}
+  }
+  function salvar() {
+    try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (e) {}
+  }
+
+  function extraPorId(id) { return EXTRAS.filter(function (e) { return e.id === id; })[0]; }
+  function itemInfo(i) { return TIERS.filter(function (x) { return x.id === i.tier; })[0] || { id: "legado", marm: 8, preco: 200 }; }
+  function itemNome(i) { return "Combo Pergafit - " + itemInfo(i).marm + " marmitas"; }
+  function itemPreco(i) {
+    return Object.keys(i.extras || {}).reduce(function (soma, id) {
+      var e = extraPorId(id); return e ? soma + e.preco * i.extras[id] : soma;
+    }, itemInfo(i).preco);
+  }
+  function descExtras(extras) {
+    return Object.keys(extras).map(function (id) {
+      var e = extraPorId(id); return e ? extras[id] + "x " + e.nome : null;
+    }).filter(Boolean);
+  }
+  function subtotal() {
+    return estado.carrinho.reduce(function (s, i) { return s + itemPreco(i) * i.qtd; }, 0);
+  }
+  function cepValido() { return /^\d{5}-\d{3}$/.test(estado.cep); }
+  function kmNum() { var n = parseFloat(String(estado.km).replace(",", ".")); return estado.rotaEstado === "ok" && isFinite(n) && n > 0 ? n : 0; }
+  function taxa() { return estado.modo === "entrega" && kmNum() ? Math.round(kmNum() * VALOR_KM * 100) / 100 : 0; }
+
+  // ----- montagem do combo por sabor -----
+  var PRATOS = [
+    { g: "Carnes", itens: [["almondegas", "Almôndegas ao molho com massa", ["Molho de tomate", "Molho branco"]], ["iscas", "Iscas de carne com legumes gratinados"], ["picadinho", "Picadinho à jardineira"], ["hamburguer", "Hambúrguer artesanal com legumes gratinados"], ["strog-carne", "Strogonoff de carne"], ["escond-carne", "Escondidinho de carne"]] },
+    { g: "Frangos", itens: [["frango-desf", "Frango desfiado com legumes e purê"], ["salpicao", "Salpicão de frango"], ["frango-grel", "Frango grelhado"], ["strog-frango", "Strogonoff de frango"], ["escond-frango", "Escondidinho de frango"]] },
+    { g: "Massas & panquecas", nota: "Escolha o tipo de massa e o molho nas opções de cada alimento.", itens: [["panq-carne", "Panqueca de carne"], ["panq-frango", "Panqueca de frango"], ["espaguete", "Espaguete", ["Molho branco", "Bolonhesa", "Creme de frango"]], ["fusilli", "Fusilli", ["Molho branco", "Bolonhesa", "Creme de frango"]], ["fettuccine", "Fetuccine", ["Molho branco", "Bolonhesa", "Creme de frango"]], ["nhoque", "Nhoque", ["Molho de tomate", "Molho branco"]]] }
+  ];
+  var qtdCombo = 1, tierSel = TIERS[0].id, sel = {}, molhoSel = {}, avisoSelecao = "";
+  function tierAtual() { return TIERS.filter(function (x) { return x.id === tierSel; })[0]; }
+  function nomePrato(id) {
+    var nome = id;
+    PRATOS.forEach(function (g) { g.itens.forEach(function (p) { if (p[0] === id) nome = p[1]; }); });
+    return nome;
+  }
+  function opcoesPrato(id) {
+    var opcoes = [];
+    PRATOS.forEach(function (g) { g.itens.forEach(function (p) { if (p[0] === id) opcoes = p[2] || []; }); });
+    return opcoes;
+  }
+  function totalSel(s) { return Object.keys(s).reduce(function (n, k) { return n + Number(s[k] || 0); }, 0); }
+  function textoSabores(s, molhos) { return Object.keys(s).map(function (k) {
+    var detalhe = s[k] + "x " + nomePrato(k), molho = molhos && molhos[k];
+    return molho ? detalhe + " - " + molho : detalhe;
+  }); }
+  function atualizarCombo() {
+    var tr = tierAtual(), total = totalSel(sel), falta = tr.marm - total;
+    Array.prototype.forEach.call($("tiers").children, function (b) { b.setAttribute("aria-pressed", b.dataset.id === tierSel); });
+    $("base-preco").innerHTML = brl.format(tr.preco) + "<small>" + tr.marm + " marmitas · " + brl.format(tr.preco / tr.marm) + " por marmita</small>";
+    PRATOS.forEach(function (g) { g.itens.forEach(function (p) {
+      var quantidade = sel[p[0]] || 0;
+      $("s-" + p[0]).textContent = quantidade;
+      $("m-" + p[0]).disabled = quantidade === 0;
+      $("p-" + p[0]).disabled = falta <= 0;
+      if (p[2] && p[2].length) {
+        $("o-" + p[0]).value = molhoSel[p[0]] || p[2][0];
+        $("o-" + p[0]).parentNode.style.display = quantidade > 0 ? "flex" : "none";
+      }
+    }); });
+    var contador = $("contador");
+    if (avisoSelecao) {
+      contador.textContent = avisoSelecao;
+      contador.className = "contador alerta";
+    } else {
+      contador.textContent = falta > 0
+        ? total + " de " + tr.marm + " marmitas selecionadas por combo. Faltam " + falta + "."
+        : tr.marm + " de " + tr.marm + " marmitas selecionadas por combo. Combo completo!";
+      contador.className = "contador" + (falta === 0 ? " completo" : "");
+    }
+    $("q-combo").textContent = qtdCombo;
+    $("add-combo").textContent = "Adicionar ao carrinho · " + brl.format(tr.preco * qtdCombo);
+    $("add-combo").setAttribute("aria-disabled", falta === 0 ? "false" : "true");
+  }
+  function renderMontador() {
+    $("tiers").innerHTML = TIERS.map(function (x) {
+      return '<button type="button" class="tier" data-id="' + x.id + '" aria-pressed="false"><b>' + x.marm + '</b><span>marmitas · ' + brl.format(x.preco) + '</span></button>';
+    }).join("");
+    $("escolha").innerHTML = PRATOS.map(function (g) {
+      return '<section class="grupo-pratos" aria-label="' + g.g.replace("&", "&amp;") + '"><h3>' + g.g.replace("&", "&amp;") + '</h3><ul class="pratos">' + g.itens.map(function (p) {
+      var opcoes = p[2] && p[2].length ? '<label class="opcao-prato"><span>Escolha o molho</span><select id="o-' + p[0] + '" data-molho="' + p[0] + '" aria-label="Escolha o molho de ' + p[1] + '">' + p[2].map(function (op) { return '<option value="' + op + '">' + op + '</option>'; }).join("") + '</select></label>' : '';
+      return '<li><div class="pn">' + p[1] + opcoes + '</div><div class="qtd"><button type="button" id="m-' + p[0] + '" data-id="' + p[0] + '" data-d="-1" aria-label="Diminuir uma marmita de ' + p[1] + '">&minus;</button><output id="s-' + p[0] + '" aria-live="polite">0</output><button type="button" id="p-' + p[0] + '" data-id="' + p[0] + '" data-d="1" aria-label="Adicionar uma marmita de ' + p[1] + '">+</button></div></li>';
+      }).join("") + '</ul>' + (g.nota ? '<span class="gnota">' + g.nota + '</span>' : '') + '</section>';
+    }).join("");
+    atualizarCombo();
+  }
+  $("tiers").addEventListener("click", function (ev) {
+    var botao = ev.target.closest("button"); if (!botao) return;
+    tierSel = botao.dataset.id;
+    if (totalSel(sel) > tierAtual().marm) {
+      sel = {};
+      avisoSelecao = "O novo combo comporta menos marmitas; a seleção anterior foi limpa. Escolha os sabores novamente.";
+    } else avisoSelecao = "";
+    atualizarCombo();
+  });
+  $("escolha").addEventListener("click", function (ev) {
+    var botao = ev.target.closest("button"); if (!botao || botao.disabled) return;
+    var id = botao.dataset.id, delta = Number(botao.dataset.d), quantidade = (sel[id] || 0) + delta;
+    if (delta > 0 && totalSel(sel) >= tierAtual().marm) return;
+    if (quantidade > 0) sel[id] = quantidade; else delete sel[id];
+    avisoSelecao = "";
+    atualizarCombo();
+  });
+  $("escolha").addEventListener("change", function (ev) {
+    var campo = ev.target.closest("select[data-molho]"); if (!campo) return;
+    molhoSel[campo.dataset.molho] = campo.value;
+  });
+  $("q-menos").addEventListener("click", function () { qtdCombo = Math.max(1, qtdCombo - 1); atualizarCombo(); });
+  $("q-mais").addEventListener("click", function () { qtdCombo = Math.min(20, qtdCombo + 1); atualizarCombo(); });
+  $("add-combo").addEventListener("click", function () {
+    var tr = tierAtual(), falta = tr.marm - totalSel(sel);
+    if (falta > 0) {
+      avisoSelecao = "Escolha mais " + falta + (falta === 1 ? " marmita" : " marmitas") + " para completar o combo de " + tr.marm + ".";
+      atualizarCombo(); $("escolha").scrollIntoView({ behavior: "smooth", block: "start" }); return;
+    }
+    var sabores = JSON.parse(JSON.stringify(sel));
+    var molhos = JSON.parse(JSON.stringify(molhoSel));
+    Object.keys(sabores).forEach(function (id) {
+      if (!molhos[id]) {
+        var opcoes = opcoesPrato(id);
+        if (opcoes.length) molhos[id] = opcoes[0];
+      }
+    });
+    var chave = tierSel + ":" + JSON.stringify(Object.keys(sabores).sort().map(function (k) { return [k, sabores[k], molhos[k] || ""]; }));
+    var achou = estado.carrinho.filter(function (i) { return i.chave === chave; })[0];
+    if (achou) achou.qtd = Math.min(20, achou.qtd + qtdCombo);
+    else estado.carrinho.push({ chave: chave, tier: tierSel, qtd: qtdCombo, extras: {}, sabores: sabores, molhos: molhos });
+    sel = {}; molhoSel = {}; avisoSelecao = ""; qtdCombo = 1;
+    atualizarCombo(); salvar(); render();
+    $("carrinho-bloco").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  function detalheItem(i) {
+    var partes = i.sabores && totalSel(i.sabores) ? textoSabores(i.sabores, i.molhos) : [];
+    var adicionais = descExtras(i.extras || {});
+    if (adicionais.length) partes.push("Adicionais: " + adicionais.join(", "));
+    return partes.length ? partes.join(", ") : itemInfo(i).marm + " marmitas";
+  }
+
+  // ----- carrinho -----
+  function renderCarrinho() {
+    var ul = $("carrinho"); ul.innerHTML = "";
+    estado.carrinho.forEach(function (i, idx) {
+      var li = document.createElement("li");
+      li.innerHTML = '<div class="topo-item"><strong>' + itemNome(i) + '</strong><span class="preco">' + brl.format(itemPreco(i) * i.qtd) + '</span></div>' +
+        '<div class="detalhe">Sabores por combo: ' + detalheItem(i) + '</div>' +
+        '<div class="rodape-item"><div class="qtd"><button type="button" data-i="' + idx + '" data-d="-1" aria-label="Diminuir quantidade">&minus;</button><output>' + i.qtd + '</output><button type="button" data-i="' + idx + '" data-d="1" aria-label="Aumentar quantidade">+</button></div>' +
+        '<button class="remover" type="button" data-i="' + idx + '" data-rm="1">Remover</button></div>';
+      ul.appendChild(li);
+    });
+    var vazio = estado.carrinho.length === 0;
+    $("vazio").hidden = !vazio; $("limpar").hidden = vazio; ul.hidden = vazio;
+    var un = estado.carrinho.reduce(function (s, i) { return s + i.qtd; }, 0);
+    $("resumo-carrinho").textContent = vazio ? "Salvo neste aparelho" : un + (un === 1 ? " combo" : " combos") + " \u00b7 salvo neste aparelho";
+  }
+  $("carrinho").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button"); if (!b) return;
+    var i = estado.carrinho[Number(b.dataset.i)]; if (!i) return;
+    if (b.dataset.rm) estado.carrinho.splice(Number(b.dataset.i), 1);
+    else { i.qtd += Number(b.dataset.d); if (i.qtd <= 0) estado.carrinho.splice(Number(b.dataset.i), 1); else i.qtd = Math.min(20, i.qtd); }
+    salvar(); render();
+  });
+  $("limpar").addEventListener("click", function () { estado.carrinho = []; salvar(); render(); });
+
+  // ----- entrega -----
+  function setModo(m) { estado.modo = m; salvar(); render(); }
+  $("modo-entrega").addEventListener("click", function () { setModo("entrega"); });
+  $("modo-retirada").addEventListener("click", function () { setModo("retirada"); });
+  $("nome").addEventListener("input", function (e) { estado.nome = e.target.value; salvar(); render(false); });
+  $("obs").addEventListener("input", function (e) { estado.obs = e.target.value; salvar(); render(false); });
+  $("endereco").addEventListener("input", function (e) {
+    estado.endereco = e.target.value; estado.destino = null; estado.km = "";
+    estado.rotaEstado = estado.endereco.trim() ? "aguardando" : "vazio";
+    mensagemFalhaRota = ""; sequenciaRota++; salvar(); render(false);
+  });
+  $("endereco").addEventListener("blur", function () {
+    if (estado.modo === "entrega" && estado.endereco.trim() && !estado.destino) geocodificarEndereco();
+  });
+  $("compl").addEventListener("input", function (e) { estado.compl = e.target.value; salvar(); render(false); });
+  $("cep").addEventListener("input", function (e) {
+    var d = e.target.value.replace(/\D/g, "").slice(0, 8);
+    estado.cep = d.length > 5 ? d.slice(0, 5) + "-" + d.slice(5) : d;
+    e.target.value = estado.cep;
+    if (estado.endereco.trim()) {
+      estado.destino = null; estado.km = ""; estado.rotaEstado = "aguardando";
+      mensagemFalhaRota = ""; sequenciaRota++;
+    }
+    salvar(); render(false);
+  });
+  $("cep").addEventListener("blur", function () {
+    if (estado.modo === "entrega" && estado.endereco.trim() && !estado.destino) geocodificarEndereco();
+  });
+
+  function cepFormatado(valor) {
+    var digitos = String(valor || "").replace(/\D/g, "").slice(0, 8);
+    return digitos.length > 5 ? digitos.slice(0, 5) + "-" + digitos.slice(5) : digitos;
+  }
+  function preencherCep(componentes) {
+    var postal = (componentes || []).filter(function (c) { return (c.types || []).indexOf("postal_code") >= 0; })[0];
+    if (!postal) return;
+    var cep = cepFormatado(postal.long_name || postal.short_name);
+    if (/^\d{5}-\d{3}$/.test(cep)) { estado.cep = cep; $("cep").value = cep; }
+  }
+  function falhaRota(mensagem) {
+    estado.km = ""; estado.rotaEstado = "erro"; mensagemFalhaRota = mensagem || "";
+    salvar(); render(false);
+  }
+  function calcularRota(destino) {
+    if (!direcoes || !destino) { falhaRota("O serviço de mapas está indisponível."); return; }
+    var chamada = ++sequenciaRota;
+    estado.destino = { lat: Number(destino.lat), lng: Number(destino.lng) };
+    estado.km = ""; estado.rotaEstado = "calculando"; mensagemFalhaRota = "";
+    salvar(); render(false);
+    direcoes.route({
+      origin: ORIGEM_ENTREGA,
+      destination: new google.maps.LatLng(estado.destino.lat, estado.destino.lng),
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      provideRouteAlternatives: false
+    }, function (resultado, status) {
+      if (chamada !== sequenciaRota) return;
+      var perna = resultado && resultado.routes && resultado.routes[0] && resultado.routes[0].legs && resultado.routes[0].legs[0];
+      if (status !== "OK" || !perna || !perna.distance || !isFinite(perna.distance.value) || perna.distance.value <= 0) {
+        falhaRota("Não foi possível calcular a rota neste endereço."); return;
+      }
+      estado.km = (perna.distance.value / 1000).toFixed(2);
+      estado.rotaEstado = "ok"; mensagemFalhaRota = "";
+      salvar(); render(false);
+    });
+  }
+  function geocodificarEndereco() {
+    if (!geocodificador) { falhaRota("O Google Maps ainda não está disponível."); return; }
+    var consulta = estado.endereco.trim();
+    if (estado.cep && consulta.indexOf(estado.cep) < 0) consulta += ", " + estado.cep;
+    if (estado.compl.trim()) consulta += ", " + estado.compl.trim();
+    var chamada = ++sequenciaRota;
+    estado.km = ""; estado.rotaEstado = "calculando"; mensagemFalhaRota = "";
+    salvar(); render(false);
+    geocodificador.geocode({ address: consulta, region: "BR" }, function (resultados, status) {
+      if (chamada !== sequenciaRota) return;
+      if (status !== "OK" || !resultados || !resultados[0] || !resultados[0].geometry || !resultados[0].geometry.location) {
+        falhaRota("Não foi possível localizar esse endereço no mapa."); return;
+      }
+      var resultado = resultados[0], ponto = resultado.geometry.location;
+      estado.destino = { lat: ponto.lat(), lng: ponto.lng() };
+      estado.endereco = resultado.formatted_address || estado.endereco;
+      $("endereco").value = estado.endereco;
+      preencherCep(resultado.address_components);
+      salvar(); calcularRota(estado.destino);
+    });
+  }
+  function selecionarEndereco(place) {
+    if (!place || !place.geometry || !place.geometry.location) {
+      falhaRota("Não foi possível localizar esse endereço. Confira os dados e tente novamente."); return;
+    }
+    var ponto = place.geometry.location;
+    estado.endereco = place.formatted_address || $("endereco").value.trim();
+    $("endereco").value = estado.endereco;
+    estado.destino = { lat: ponto.lat(), lng: ponto.lng() };
+    preencherCep(place.address_components);
+    salvar(); calcularRota(estado.destino);
+  }
+  window.initPergafitMaps = function () {
+    try {
+      direcoes = new google.maps.DirectionsService();
+      geocodificador = new google.maps.Geocoder();
+      autocompleteEndereco = new google.maps.places.Autocomplete($("endereco"), {
+        componentRestrictions: { country: "br" },
+        fields: ["formatted_address", "geometry", "address_components"],
+        types: ["address"]
+      });
+      autocompleteEndereco.addListener("place_changed", function () { selecionarEndereco(autocompleteEndereco.getPlace()); });
+      if (estado.endereco.trim()) {
+        if (estado.destino) calcularRota(estado.destino); else geocodificarEndereco();
+      }
+    } catch (e) { falhaRota("Não foi possível iniciar o mapa para calcular o frete."); }
+  };
+  window.gm_authFailure = function () { falhaRota("O serviço de mapas não autorizou o cálculo da rota."); };
+
+  function textoPedido() {
+    var L = ["*Pedido Pergafit*"];
+    if (estado.nome.trim()) L.push("Nome: " + estado.nome.trim());
+    L.push("");
+    estado.carrinho.forEach(function (i) {
+      L.push(i.qtd + "x " + itemNome(i) + " - " + brl.format(itemPreco(i) * i.qtd));
+      L.push("   Sabores por combo: " + detalheItem(i));
+    });
+    L.push("");
+    if (estado.obs.trim()) { L.push("Sabores/observações: " + estado.obs.trim()); L.push(""); }
+    L.push("Subtotal: " + brl.format(subtotal()));
+    if (estado.modo === "retirada") {
+      L.push("Recebimento: retirada no restaurante");
+      L.push("Total: " + brl.format(subtotal()));
+    } else {
+      L.push("Recebimento: entrega");
+      L.push("Endereço: " + estado.endereco.trim());
+      L.push("CEP: " + estado.cep + (estado.compl.trim() ? " | " + estado.compl.trim() : ""));
+      if (kmNum()) {
+        L.push("Distância de carro: " + kmNum().toLocaleString("pt-BR") + " km x " + brl.format(VALOR_KM) + "/km");
+        L.push("Taxa de entrega: " + brl.format(taxa()));
+        L.push("Total: " + brl.format(subtotal() + taxa()));
+      } else {
+        L.push("Taxa de entrega: a confirmar pelo WhatsApp (rota não calculada)");
+        L.push("Total sem taxa de entrega: " + brl.format(subtotal()));
+      }
+      L.push("O valor do frete será confirmado oficialmente após o envio do pedido pelo WhatsApp.");
+    }
+    return L.join("\n");
+  }
+
+  function render(completo) {
+    if (completo !== false) { renderCarrinho(); }
+    var entrega = estado.modo === "entrega";
+    $("modo-entrega").setAttribute("aria-pressed", entrega);
+    $("modo-retirada").setAttribute("aria-pressed", !entrega);
+    $("campos-entrega").hidden = !entrega;
+    $("campos-entrega").style.display = entrega ? "flex" : "none";
+    if ($("nome").value !== estado.nome) $("nome").value = estado.nome;
+    if ($("endereco").value !== estado.endereco) $("endereco").value = estado.endereco;
+    if ($("cep").value !== estado.cep) $("cep").value = estado.cep;
+    if ($("compl").value !== estado.compl) $("compl").value = estado.compl;
+    if ($("obs").value !== estado.obs) $("obs").value = estado.obs;
+    $("regra-frete").textContent = "Taxa de " + brl.format(VALOR_KM) + " por km de trajeto de carro";
+    var sub = subtotal(), tx = taxa();
+    $("subtotal").textContent = brl.format(sub);
+    $("total").textContent = brl.format(sub + tx);
+    var distancia = kmNum();
+    if (!entrega) {
+      $("nota-total").textContent = "Retirada no restaurante, sem taxa de entrega.";
+    } else if (distancia) {
+      $("nota-total").textContent = "Frete calculado para " + distancia.toLocaleString("pt-BR") + " km de carro.";
+    } else if (estado.rotaEstado === "erro") {
+      $("nota-total").textContent = "A taxa será confirmada pelo WhatsApp. O total exibido não inclui o frete.";
+    } else if (estado.rotaEstado === "calculando") {
+      $("nota-total").textContent = "Calculando o trajeto para atualizar o total…";
+    } else {
+      $("nota-total").textContent = "Informe o endereço completo para calcular a taxa de entrega.";
+    }
+    if (!entrega) {
+      $("status-rota").textContent = "";
+      $("frete").textContent = "";
+    } else if (distancia) {
+      $("status-rota").textContent = "Rota de carro calculada automaticamente pelo Google Maps.";
+      $("frete").textContent = "Distância: " + distancia.toLocaleString("pt-BR") + " km × " + brl.format(VALOR_KM) + "/km = " + brl.format(tx) + ".";
+    } else if (estado.rotaEstado === "calculando") {
+      $("status-rota").textContent = "Calculando a rota de carro pelo Google Maps…";
+      $("frete").textContent = "Aguarde o cálculo do frete.";
+    } else if (estado.rotaEstado === "erro") {
+      $("status-rota").textContent = (mensagemFalhaRota || "Não foi possível calcular a rota.") + " O frete poderá ser confirmado pelo WhatsApp.";
+      $("frete").textContent = "Taxa de entrega a confirmar pelo WhatsApp.";
+    } else {
+      $("status-rota").textContent = "Digite o endereço completo normalmente para calcular a distância automaticamente.";
+      $("frete").textContent = "Tarifa: " + brl.format(VALOR_KM) + " por km de trajeto de carro.";
+    }
+    $("status-rota").hidden = !entrega;
+    $("frete").hidden = !entrega;
+
+    var erro = "";
+    if (estado.carrinho.length === 0) erro = "Adicione ao menos um combo ao carrinho.";
+    else if (entrega && !estado.endereco.trim()) erro = "Informe o endereço completo para a entrega.";
+    else if (entrega && !cepValido()) erro = "Informe o CEP completo para a entrega.";
+    else if (entrega && estado.rotaEstado === "calculando") erro = "Aguarde o cálculo da rota de entrega.";
+    else if (entrega && estado.rotaEstado !== "ok" && estado.rotaEstado !== "erro") erro = "Aguarde a localização automática do endereço para calcular o frete.";
+    var ok = !erro;
+    var a = $("cta-pedido");
+    a.setAttribute("aria-disabled", ok ? "false" : "true");
+    a.href = ok ? "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(textoPedido()) : "#";
+    a.dataset.erro = erro;
+    $("endereco").setAttribute("aria-invalid", entrega && !estado.endereco.trim() ? "true" : "false");
+    $("cep").setAttribute("aria-invalid", entrega && estado.cep.length > 0 && !cepValido() && estado.cep.length === 9 ? "true" : "false");
+    if (ok) $("erro-pedido").textContent = "";
+  }
+  $("cta-pedido").addEventListener("click", function (ev) {
+    if (this.getAttribute("aria-disabled") === "true") {
+      ev.preventDefault(); $("erro-pedido").textContent = this.dataset.erro || "";
+      if (estado.modo === "entrega" && estado.carrinho.length) { if (!estado.endereco.trim()) $("endereco").focus(); else if (!cepValido()) $("cep").focus(); else if (estado.rotaEstado === "calculando") $("endereco").focus(); }
+    }
+  });
+
+  // Botão do topo: conversa livre
+  $("cta").href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent("Olá! Vim pelo Instagram e quero fazer um pedido.");
+
+  carregar(); renderMontador(); render();
+  (function carregarMaps() {
+    var config = window.PERGAFIT_MAPS_CONFIG || {};
+    if (!config.apiBase || !config.browserKey) { falhaRota("O cálculo automático de rotas está indisponível."); return; }
+    var scriptMaps = document.createElement("script");
+    scriptMaps.crossOrigin = "anonymous";
+    scriptMaps.src = config.apiBase.replace(/\/$/, "") + "/v1/maps/proxy/maps/api/js?key=" + encodeURIComponent(config.browserKey) + "&origin=" + encodeURIComponent(window.location.origin) + "&libraries=places&callback=initPergafitMaps";
+    scriptMaps.async = true; scriptMaps.defer = true;
+    scriptMaps.onerror = function () { falhaRota("Não foi possível carregar o Google Maps."); };
+    document.head.appendChild(scriptMaps);
+  })();
+</script>
+
+</body></html>
